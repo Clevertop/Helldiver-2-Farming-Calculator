@@ -1,0 +1,148 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpa3y5pkkf0dw"]
+
+[ext_resource type="Script" path="res://logic.gd" id="1_oa7ox"]
+[ext_resource type="Texture2D" uid="uid://bskgme2radxb1" path="res://Super_Credit.svg" id="2_k60xb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8sxj1"]
+font_size = 20
+font_color = Color(0, 1, 1, 1)
+
+[node name="Main" type="Control" node_paths=PackedStringArray("timer_label", "play_button", "pause_button", "reset_button", "add10_button", "add100_button", "undo_button", "credits_label", "pickups_label", "warbond_label", "current_sc_label", "sc_entry")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oa7ox")
+timer_label = NodePath("VBoxContainer/Timer")
+play_button = NodePath("VBoxContainer/HBoxContainer/PlayButton")
+pause_button = NodePath("VBoxContainer/HBoxContainer/PauseButton")
+reset_button = NodePath("VBoxContainer/HBoxContainer/ResetButton")
+add10_button = NodePath("VBoxContainer/HBoxContainer2/Add10")
+add100_button = NodePath("VBoxContainer/HBoxContainer2/Add100")
+undo_button = NodePath("VBoxContainer/HBoxContainer2/Undo")
+credits_label = NodePath("VBoxContainer/SuperCreditsDisplay")
+pickups_label = NodePath("VBoxContainer/PickupsDisplay")
+warbond_label = NodePath("VBoxContainer/NextWarbond")
+current_sc_label = NodePath("VBoxContainer/HBoxContainer3/Credits")
+sc_entry = NodePath("VBoxContainer/HBoxContainer3/SCEntry")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Tabby's Super Credit Calculator"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Play"
+
+[node name="PauseButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pause"
+
+[node name="ResetButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset"
+
+[node name="Timer" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "01:23:45"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Add10" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+10"
+icon = ExtResource("2_k60xb")
+expand_icon = true
+
+[node name="Add100" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+100"
+icon = ExtResource("2_k60xb")
+expand_icon = true
+
+[node name="Undo" type="Button" parent="VBoxContainer/HBoxContainer2"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Undo"
+icon = ExtResource("2_k60xb")
+expand_icon = true
+
+[node name="SuperCreditsDisplay" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "300 Super Credits - 134 /h"
+horizontal_alignment = 1
+
+[node name="PickupsDisplay" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "12 Pickups - 3.2 /h"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("2_k60xb")
+expand_mode = 2
+
+[node name="Credits" type="Label" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "1200"
+label_settings = SubResource("LabelSettings_8sxj1")
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="SCEntry" type="LineEdit" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+placeholder_text = "New SC"
+
+[node name="SetSCButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Set"
+
+[node name="NextWarbond" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Next Warbond in: 12m"
+horizontal_alignment = 1
+clip_text = true
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Add10" to="." method="_on_add_10_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Add100" to="." method="_on_add_100_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Undo" to="." method="_on_undo_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/SetSCButton" to="." method="_on_set_sc_button_pressed"]
