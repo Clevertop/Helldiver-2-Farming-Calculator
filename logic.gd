@@ -33,7 +33,7 @@ func _process(delta):
 	pause_button.disabled = !running 
 	add10_button.disabled = !running 
 	add100_button.disabled = !running 
-	reset_button.disabled = not pickups.size() > 0
+	reset_button.disabled = not timer > 0
 	undo_button.disabled = not pickups.size() > 0
 	
 	current_sc_label.text = str(super_credits)
@@ -44,7 +44,8 @@ func _process(delta):
 
 #returns the amount of minutes until 1000 sc reached 
 func get_next_warbond() -> int:
-	var next_warbond_needed : float = 1000 - super_credits
+	var next_warbond_needed : float = 1000 - wrap(super_credits,0, 1000)
+	
 	if next_warbond_needed <= 0:
 		return 0
 	var sc_per_hour_min : float = round((pickups.size()*10)*(3600/timer))
